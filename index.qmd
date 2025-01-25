@@ -1,14 +1,13 @@
 ---
-title: "LIS4273blog"
+title: "Robert Walsh's LIS4273 Advanced Stats blog"
 listing:
   contents: posts
   sort: "date desc"
   type: default
-  categories: true
+  categories: false
   sort-ui: false
   filter-ui: false
 page-layout: full
 title-block-banner: true
 ---
 
-Test Test
