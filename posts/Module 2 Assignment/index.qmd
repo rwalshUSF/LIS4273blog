@@ -1,0 +1,42 @@
+---
+title: "Module 2 Assignment"
+author: "Robert Walsh"
+image: "mean-arithmetic.jpg"
+date: "2025-01-24"
+---
+
+This Function Calculates The Mean!
+
+Here is how it works!
+
+```{r}
+# LIS4273 - Module 2. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Create a vector using the c() function
+# and store the results in the 'assignment2' variable/object
+
+assignment2 <- c(6,18,14,22,27,17,22,20,22)
+
+# Create a function named 'myMean' that will
+# accept 'assignment2' as an input variable/argument and then
+# calculate & return the value of the sum of all values in the
+# 'assignment2' vector using the sum() function, and then divide
+# that result by the number of components in the 'assignment2'
+# vector using the length() function. the result is stored in the
+# 'result' variable/object.
+
+myMean <- function(assignment2) 
+{
+  return(sum(assignment2)/length(assignment2))
+}
+
+# print the result as output by calling 'myMean' with 
+# 'assignment2' as the argument
+
+result <- myMean(assignment2)
+result
+
+# Here is the output!
+```

@@ -1,1 +1,12 @@
 /* css styles */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+h1.title {
+  font-family: "Permanent Marker";
+  font-size: 50px;
+  color: white;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+}
+body {
+  background-color: beige;
+}

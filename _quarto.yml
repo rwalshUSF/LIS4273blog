@@ -4,16 +4,13 @@ project:
 website:
   title: "LIS4273blog"
   navbar:
+    background: "#006747"
     right:
       - about.qmd
-      - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
 format:
   html:
     theme: cosmo
     css: styles.css
-
+    highlight-style: tango
 editor: visual
 

@@ -1,30 +1,30 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Robert Walsh’s LIS4273 Advanced Stats blog",
-    "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\n\n\n\n\n\nJan 24, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "A blog for sharing my class assignments."
-  },
-  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "This is the first post in my LIS4273 blog. Welcome!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": " USF - LIS4273 Advanced Stats - Blog ",
+    "section": "",
+    "text": "Module 2 Assignment\n\n\n\n\n\n\n\n\n\n\n\nJan 24, 2025\n\n\nRobert Walsh\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\nRobert Walsh\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Robert Walsh",
+    "section": "",
+    "text": "A blog for sharing my class assignments."
+  },
+  {
+    "objectID": "posts/Module 2 Assignment/index.html",
+    "href": "posts/Module 2 Assignment/index.html",
+    "title": "Module 2 Assignment",
+    "section": "",
+    "text": "This Function Calculates The Mean!\nHere is how it works!\n\n# LIS4273 - Module 2. Assignment\n# Robert Walsh\n# Professor Lingyao Li\n\n# Create a vector using the c() function\n# and store the results in the 'assignment2' variable/object\n\nassignment2 &lt;- c(6,18,14,22,27,17,22,20,22)\n\n# Create a function named 'myMean' that will\n# accept 'assignment2' as an input variable/argument and then\n# calculate & return the value of the sum of all values in the\n# 'assignment2' vector using the sum() function, and then divide\n# that result by the number of components in the 'assignment2'\n# vector using the length() function. the result is stored in the\n# 'result' variable/object.\n\nmyMean &lt;- function(assignment2) \n{\n  return(sum(assignment2)/length(assignment2))\n}\n\n# print the result as output by calling 'myMean' with \n# 'assignment2' as the argument\n\nresult &lt;- myMean(assignment2)\nresult\n\n[1] 18.66667\n\n# Here is the output!"
   }
 ]

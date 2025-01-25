@@ -1,5 +1,5 @@
 ---
-title: "Robert Walsh's LIS4273 Advanced Stats blog"
+title: "![](USF50.jpg) USF - LIS4273 Advanced Stats - Blog ![](USF50.jpg)"
 listing:
   contents: posts
   sort: "date desc"

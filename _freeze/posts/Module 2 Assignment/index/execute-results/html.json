@@ -1,0 +1,15 @@
+{
+  "hash": "d833ce93f32cf2d3a0cb12fc0b5290ba",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Module 2 Assignment\"\nauthor: \"Robert Walsh\"\nimage: \"mean-arithmetic.jpg\"\ndate: \"2025-01-24\"\n---\n\n\n\nThis Function Calculates The Mean!\n\nHere is how it works!\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# LIS4273 - Module 2. Assignment\n# Robert Walsh\n# Professor Lingyao Li\n\n# Create a vector using the c() function\n# and store the results in the 'assignment2' variable/object\n\nassignment2 <- c(6,18,14,22,27,17,22,20,22)\n\n# Create a function named 'myMean' that will\n# accept 'assignment2' as an input variable/argument and then\n# calculate & return the value of the sum of all values in the\n# 'assignment2' vector using the sum() function, and then divide\n# that result by the number of components in the 'assignment2'\n# vector using the length() function. the result is stored in the\n# 'result' variable/object.\n\nmyMean <- function(assignment2) \n{\n  return(sum(assignment2)/length(assignment2))\n}\n\n# print the result as output by calling 'myMean' with \n# 'assignment2' as the argument\n\nresult <- myMean(assignment2)\nresult\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 18.66667\n```\n\n\n:::\n\n```{.r .cell-code}\n# Here is the output!\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
