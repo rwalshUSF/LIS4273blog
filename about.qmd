@@ -4,5 +4,6 @@ image: USF500.jpg
 about:
   template: jolla
 ---
+UNIVERSITY OF SOUTH FLORIDA - SCHOOL OF INFORMATION - LIS4273
 
 A blog for sharing my class assignments.
