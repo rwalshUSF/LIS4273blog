@@ -4,11 +4,10 @@ project:
 website:
   title: "LIS4273blog"
   navbar:
+    logo: "USFICON.png"
     background: "#006747"
     right:
       - about.qmd
-      - icon: USF
-        href: "USFICON.png"
 format:
   html:
     theme: cosmo
