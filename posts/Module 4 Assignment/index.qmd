@@ -72,4 +72,3 @@ to drastically change the initial low probability of rain.")
 # with the traditional method?
 paste("The probability is:",dbinom(x=0,size=10,prob=.20),"%")
 ```
-
