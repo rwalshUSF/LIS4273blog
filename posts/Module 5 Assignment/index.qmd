@@ -131,6 +131,7 @@ z < -z.half.alpha || abs(z) > z.half.alpha
 # that there is evidence that the machine is not meeting the 
 # manufacturer’s specifications for average strength.
 ```
+
 ```{r}
 # Question B. If x̅ = 85, σ = standard deviation = 8, and n=64,
 # set up 95% confidence interval estimate of the population mean μ.
@@ -153,6 +154,7 @@ print("(83.04,86.96)")
 # There is a 95% probability that the population mean
 # would be in between these two values.
 ```
+
 ```{r}
 # Question C. Given the time spent on assignments each week
 # for the sampled girl group and boy group, respectively,
@@ -163,9 +165,6 @@ girls_time_spend <- c(19, 20, 22, 25, 28, 30, 32, 36)
 boys_grades <- c(86, 84, 92, 93, 93, 96, 98, 98)
 boys_time_spend <- c(15, 19, 22, 23, 25, 29, 30, 40)
 
-data.set<-data.frame("Girls Grades"=girls_grades,"Girls Time"=girls_time_spend,
-"Boys Grades"=boys_grades,"Boys Time"=boys_time_spend)
-
 # Please perform the correlation analysis:
 
 # C1. Calculate the correlation coefficient (Pearson) between
@@ -173,44 +172,33 @@ data.set<-data.frame("Girls Grades"=girls_grades,"Girls Time"=girls_time_spend,
 
 # The Pearson correlation coefficient between time spent and grade
 # for the Girls' dataset:
-round(cor(data.set$Girls.Time,data.set$Girls.Grades,method="pearson"),digits=2)
+x<-c(girls_grades)
+y<-c(girls_time_spend)
+girlsData<-data.frame(x,y)
+round(cor(girlsData,method="pearson"),digits=2)
 # This result is close to 1 so a strong positive relation is implied.
 
 # The Pearson correlation coefficient between time spent and grade
 # for the Boys' dataset:
-round(cor(data.set$Boys.Time,data.set$Boys.Grades,method="pearson"),digits=2)
+x<-c(boys_grades)
+y<-c(boys_time_spend)
+boysData<-data.frame(x,y)
+round(cor(boysData,method="pearson"),digits=2)
 # This result is close to 1 so a strong positive relation is implied.
-
-# This is the multivariable matrix's correlation analysis
-# including all variables, using two different tests:
-
-# As pearson correlation
-round(cor(data.set,method="pearson"),digits=2)
-
-#As spearman correlation
-round(cor(data.set, method="spearman"),digits=2)
-# Both tests indicate strong positive relations between the variables.
 
 # C2. Use ggpairs to plot the time spent and grade for
 # girls' and boys' datasets, respectively.
 
 # For the Girls' dataset:
 ggpairs(
-  data.set[,1:2],
+  girlsData,
   upper = list(wrap("cor", size = 5)),
   diag = list(continuous = "densityDiag"),
 )
 # For the Boys' dataset:
 ggpairs(
-  data.set[,3:4],
+  boysData,
   upper = list(wrap("cor", size = 5)), 
   diag = list(continuous = "densityDiag"),
 )
-# For the Girls' and Boys' datasets combined:
-ggpairs(
-  data.set,
-  upper = list(wrap("cor", size = 5)),
-  diag = list(continuous = "densityDiag"),
-)
 ```
-
