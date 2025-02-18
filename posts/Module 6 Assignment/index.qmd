@@ -1,0 +1,99 @@
+---
+title: "Module 6 Assignment"
+author: "Robert Walsh"
+image: "normdist.jpg"
+date: "2025-02-17"
+---
+
+Random Variables & Probability Distributions!
+
+```{r}
+# LIS4273 - Module 6. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# Consider a population consisting of the following values,
+# which represents the number of ice cream purchases during
+# one year for each of the five housemates.
+
+# 8, 14, 16, 10, 11.
+numPurchases<-c(8,14,16,10,11)
+# A1. Compute the mean of this population.
+popMean<-mean(numPurchases)
+# A2. Select a random sample of size 2 out of the five members.
+rSample<-sample(numPurchases,2)
+# A3. Compute the mean and standard deviation of your sample.
+
+# The Mean of the sample:
+rSampleMean<-mean(rSample)
+
+# The standard deviation of the sample:
+rSampleStdDev<-sd(rSample)
+
+# A4. Compare the Mean and Standard deviation of your sample
+# to the entire population of this set (8,14, 16, 10, 11).
+
+# The standard deviation of the population:
+popStdDev<-sd(numPurchases)
+
+df<-data.frame("Population"=c(popMean,popStdDev),
+               "Sample"=c(rSampleMean,rSampleStdDev),
+               row.names=(c("Mean","Std Dev")))
+# The data frame to compare the Mean and Standard deviation of the sample
+# to the entire population of this set (8,14, 16, 10, 11).
+df
+# Question B. 
+
+# Suppose that the sample size n = 100 and
+# the population proportion p = 0.95.
+
+# B1. Does the sample proportion p have approximately
+# a normal distribution? Explain.
+cat("The distribution is considered normal if both :
+      n*p >= 5, and
+      n*q >= 5.
+      n = 100
+      p = 0.95 and 
+      q = 0.05.
+      
+      Therefore,
+      n*p = 100*0.95 = 95 >= 5 and
+      n*q = 100*0.05 = 5 >= 5.
+      
+      The sample proportion 'p' will have approximately
+      a normal distribution to be normal with these values.")
+# B2. What is the smallest value of n for which the
+# sampling distribution of p is approximately normal?
+cat("The smallest value of 'n' for which the sampling distribution
+      of 'p' is approximately normal is 100.
+      
+      Any value less than 100, when multiplied with p = 0.95
+      and q = 0.05 will make n*q <= 5,
+      and both n*p and n*q need to be >= 5
+      in order to assume a normal distribution.")
+# Question C.
+# From our textbook, Chapter 2 Probability Exercises # 2.4.
+# Simulated coin tossing is probability better done using
+# function called 'rbinom()' than using the function called 'sample()'.
+
+# C1. Please explain the reason why 'rbinom()' is better
+# than 'sample()' in the coin tossing simulation.
+cat("The reason why the 'rbinom()' function is better
+      than the 'sample()' function in the coin tossing
+      simulation is that the 'sample()' function would need to
+      create a vector with 'Char' type elements like \"H\"
+      & \"T\", then set 'replace=TRUE', & set'prob=c(0.5,0.5)'.
+      That would require extra programming instructions
+      in order to simulate random sampling from that vector.
+      This could affect the outcomes / experiment results. 
+      This extra step can be avoided by using 'rbinom()'
+      because it is designed to extract random sample outcomes from
+      the binomial distribution. This makes 'rbinom()' the better
+      choice because it is more efficient and readable as the code 
+      clearly indicates that a binomial event, like a coin toss, is 
+      being simulated."
+      )
+```
+
