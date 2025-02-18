@@ -65,7 +65,7 @@ cat("The distribution is considered normal if both :
       n*q = 100*0.05 = 5 >= 5.
       
       The sample proportion 'p' will have approximately
-      a normal distribution to be normal with these values.")
+      a normal distribution with these values.")
 # B2. What is the smallest value of n for which the
 # sampling distribution of p is approximately normal?
 cat("The smallest value of 'n' for which the sampling distribution
