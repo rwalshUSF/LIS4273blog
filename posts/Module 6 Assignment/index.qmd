@@ -22,22 +22,24 @@ Random Variables & Probability Distributions!
 numPurchases<-c(8,14,16,10,11)
 # A1. Compute the mean of this population.
 popMean<-mean(numPurchases)
+popMean
 # A2. Select a random sample of size 2 out of the five members.
 rSample<-sample(numPurchases,2)
+rSample
 # A3. Compute the mean and standard deviation of your sample.
 
 # The Mean of the sample:
 rSampleMean<-mean(rSample)
-
+rSampleMean
 # The standard deviation of the sample:
 rSampleStdDev<-sd(rSample)
-
+rSampleStdDev
 # A4. Compare the Mean and Standard deviation of your sample
 # to the entire population of this set (8,14, 16, 10, 11).
 
 # The standard deviation of the population:
 popStdDev<-sd(numPurchases)
-
+popStdDev
 df<-data.frame("Population"=c(popMean,popStdDev),
                "Sample"=c(rSampleMean,rSampleStdDev),
                row.names=(c("Mean","Std Dev")))
