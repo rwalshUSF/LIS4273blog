@@ -98,4 +98,3 @@ cat("The reason why the 'rbinom()' function is better
       being simulated."
       )
 ```
-

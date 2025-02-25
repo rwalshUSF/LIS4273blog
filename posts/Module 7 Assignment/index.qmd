@@ -1,0 +1,172 @@
+---
+title: "Module 7 Assignment"
+author: "Robert Walsh"
+image: "regression.jpg"
+date: "2025-02-25"
+---
+
+An Exercise in Simple and Multiple Regression!
+
+```{r}
+# LIS4273 - Module 7. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# In this assignment's segment, we will use the following regression
+# equation  Y = a + bX +e
+
+# Y is the value of the dependent variable (Y),
+# what is being predicted or explained
+
+# a or Alpha, a constant; equals the value of Y when the value of X=0
+
+# b or Beta, the coefficient of X; the slope of the regression line;
+# how much Y changes for each one-unit change in X.
+
+# X is the value of the Independent variable (X),
+# what is predicting or explaining the value of Y
+
+# e is the error term; the error in predicting the value of Y,
+# given the value of X (it is not displayed in most regression equations).
+
+# The data in this assignment:
+x <- c(16, 17, 13, 18, 12, 14, 19, 11, 11, 10)
+y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+
+# A1. Define the relationship model between the independent
+# and the dependent variable.
+
+# 'x' is the value of the Independent variable (X),
+# what is predicting or explaining the value of 'y'.
+# 'y' is the value of the dependent variable (Y),
+# what is being predicted or explained.
+
+# To model the relationship between how one variable affects the other:
+model.x.y<-lm(y~x,)
+# Create 'model.x.y' object to store results of.....
+# lm(Y~X), linear model: 'y' is predicted by 'x'
+
+# A2. Calculate the coefficients:
+# Print 'model.x.y' object.
+model.x.y
+
+# Question B.
+
+# The following question is posted by Chi Yau (Links to an external site.)
+# the author of  R Tutorial With Bayesian Statistics Using Stan
+# (Links to an external site.) and his blog posting regarding
+# Regression analysis (Links to an external site.).
+
+# Apply the simple linear regression model (see the above formula)
+# for the data set called "visit" (see below), and estimate the
+# discharge duration if the waiting time since the last eruption
+# has been 80 minutes.
+
+#  >head(visit) 
+#  discharge  waiting 
+# 1     3.600      79 
+# 2     1.800      54 
+# 3     3.333      74 
+# 4     2.283      62 
+# 5     4.533      85 
+# 6     2.883      55
+
+visit<-data.frame("discharge"=c(3.600,1.800,3.333,2.283,4.533,2.883),
+                  "waiting"=c(79,54,74,62,85,55))
+
+# Employ the following formula lm(discharge~waiting,data=visit)
+
+# B1. Define the relationship model between the predictor
+# and the response variable.
+
+# The 'predictor' variable predicts the 'response' variable.
+# 'waiting' is the value of the Independent variable (X),
+# what is predicting or explaining the value of 'discharge'.
+# 'discharge' is the value of the dependent variable (Y),
+# what is being predicted or explained.
+
+# To model the relationship between how one variable affects the other:
+discharge.lm<-lm(discharge~waiting,data=visit)
+# Create 'discharge.lm' object to store results of.....
+# lm(discharge~waiting,data=visit), linear model:
+# 'discharge' is predicted by 'waiting'
+
+# B2. Extract the parameters of the estimated regression equation
+# with the coefficients function.
+coeffs<-coefficients(discharge.lm)
+coeffs
+
+# B3. Determine the fit of the eruption duration using
+# the estimated regression equation.
+
+# Create 'waitingTime' object and initialize to value of '80'.
+waitingTime<-80
+# Fit the discharge duration using the estimated regression equation.
+dischargeDuration<-coeffs[1]+coeffs[2]*waitingTime
+dischargeDuration
+# Based on the linear regression model, if the waiting time since the
+# last discharge has been 80 minutes, we expect the next discharge duration
+# to last approximately 3.871431 minutes.
+
+# Question C.  Multiple regression
+
+# We will use a very famous datasets in R called mtcars. This dateset
+# was extracted from the 1974 Motor Trend US magazine, and comprises
+# fuel consumption and 10 aspects of automobile design and performance
+# for 32 automobiles (1973--74 models).
+
+# This data frame contain 32 observations on 11 (numeric) variables.
+
+# [, 1]	mpg	Miles/(US) gallon
+# [, 2]	cyl	Number of cylinders
+# [, 3]	disp	Displacement (cu.in.)
+# [, 4]	hp	Gross horsepower
+# [, 5]	drat	Rear axle ratio
+# [, 6]	wt	Weight (1000 lbs)
+# [, 7]	qsec	1/4 mile time
+# [, 8]	vs	Engine (0 = V-shaped, 1 = straight)
+# [, 9]	am	Transmission (0 = automatic, 1 = manual)
+# [,10]	gear	Number of forward gears
+
+# To call mtcars data in R
+# R comes with several built-in data sets, which are generally used
+# as demo data for playing with R functions. One of those datasets
+# build in R is mtcars.
+
+# In this question, we will use 4 of the variables found in mtcars
+# by using the following function
+# input <- mtcars[,c("mpg","disp","hp","wt")]
+
+# C1. Examine the relationship Multi Regression Model as stated above
+# and its Coefficients using 4 different variables from mtcars
+# (mpg, disp, hp and wt).
+# Report on the result and explanation what does the multi regression
+# model and coefficients tell about the data.
+input <- mtcars[,c("mpg","disp","hp","wt")]
+print(head(input))
+lm(formula=mpg~disp+hp+wt,data=input)
+cat("The relationship multi regression model demonstrates that 'mpg' is 
+the 'response variable' being predicted by 'disp', 'hp', and 'wt' which
+are the 'predictor variables.' What is learned from the coefficients is that
+'disp' and 'hp' have coefficients close to 0 which means that they may relate
+in similar ways. The -3.8 coefficient for 'wt' means that as 'wt' increases,
+'mpg' decreases and as 'mpg' increases, 'wt' decreases. This demonstrates how
+each variable predicts or affects 'mpg' differently and to what magnitude. Each
+predictor variable is individually related to the response variable.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
