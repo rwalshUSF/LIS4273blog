@@ -169,4 +169,3 @@ predictor variable is individually related to the response variable.")
 
 
 ```
-
