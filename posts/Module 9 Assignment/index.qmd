@@ -1,0 +1,60 @@
+---
+title: "Module 9 Assignment"
+author: "Robert Walsh"
+image: "table.png"
+date: "2025-03-17"
+---
+
+An Exercise in tabular data!
+
+```{r}
+# LIS4273 - Module 9. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# Your data.frame is listed as below.
+
+df <- data.frame(
+  country = c("France", "Spain", "Germany", "Spain", "Germany", "France",
+              "Spain", "France", "Germany", "France"),
+  age = c(44, 27, 30, 38, 40, 35, 52, 48, 45, 37),
+  salary = c(6000, 5000, 7000, 4000, 8000, 6000, 5000, 7000, 4000, 8000),
+  purchased = c("No", "Yes", "No", "No", "Yes", "Yes", "No",
+                "Yes", "No", "Yes")
+)
+# Please do the following:
+
+# A1. Generate a one-way table for "purchased"
+oneWayPurchased<-table(df$purchased)
+oneWayPurchased
+# A2. Generate a two-way table for "country" and "purchased."
+twoWayCountryPurchased<-table(df$country,df$purchased)
+twoWayCountryPurchased
+
+# Question B.
+
+# Generate contingency table also known as rx C table using mtcars dataset. 
+data(mtcars)
+mtcars_df <- table(mtcars$gear, mtcars$cyl, dnn = c("Gears", "Cylinders"))
+mtcars_df
+# B1. Add the addmargins() function to report on the sum totals of the
+#     rows and columns of "mtcars_df" table
+addmargins(mtcars_df)
+# addmargins() function:
+# Displays the margins of the table, or the sum of each row and/or column
+# to help understand differences among factors.
+# There are more three gear cars than four or five gear cars and more eight
+# cylinder cars than four or six cylinder cars.
+
+# B2. Add prop.tables() function, and report on the proportional weight
+#     of each value in the "mtcars_df" table
+prop.table(mtcars_df)
+# prop.table() function:
+# Displays a table of proportions rather than sums. The default argument for
+# 'margin=', the sum of all cells in the table will equal 1.
+# Therefore the largest proportion of cars have eight cylinders and 
+# three gears, 37.5%, and 0% of the cars have eight cylinders and four gears.
+```
+

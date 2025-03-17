@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Robert Walsh">
+<meta name="dcterms.date" content="2025-03-17">
 
-<title> USF - LIS4273 Advanced Stats - Blog  – LIS4273blog</title>
+<title>Module 9 Assignment – LIS4273blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,80 +102,22 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./USFICON.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../USFICON.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">LIS4273blog</span>
     </a>
   </div>
@@ -152,7 +128,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Robert Walsh</span></a>
   </li>  
 </ul>
@@ -165,294 +141,131 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
-      <h1 class="title"><img src="USF50.jpg" class="img-fluid"> USF - LIS4273 Advanced Stats - Blog <img src="USF50.jpg" class="img-fluid"></h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Module 9 Assignment</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Robert Walsh </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 17, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>An Exercise in tabular data!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LIS4273 - Module 9. Assignment</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Robert Walsh</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Professor Lingyao Li</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Question A.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Your data.frame is listed as below.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Spain"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">27</span>, <span class="dv">30</span>, <span class="dv">38</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">52</span>, <span class="dv">48</span>, <span class="dv">45</span>, <span class="dv">37</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">salary =</span> <span class="fu">c</span>(<span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">purchased =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Please do the following:</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># A1. Generate a one-way table for "purchased"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>oneWayPurchased<span class="ot">&lt;-</span><span class="fu">table</span>(df<span class="sc">$</span>purchased)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>oneWayPurchased</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ No Yes 
+  5   5 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A2. Generate a two-way table for "country" and "purchased."</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>twoWayCountryPurchased<span class="ot">&lt;-</span><span class="fu">table</span>(df<span class="sc">$</span>country,df<span class="sc">$</span>purchased)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>twoWayCountryPurchased</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         
+          No Yes
+  France   1   3
+  Germany  2   1
+  Spain    2   1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question B.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate contingency table also known as rx C table using mtcars dataset. </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mtcars_df <span class="ot">&lt;-</span> <span class="fu">table</span>(mtcars<span class="sc">$</span>gear, mtcars<span class="sc">$</span>cyl, <span class="at">dnn =</span> <span class="fu">c</span>(<span class="st">"Gears"</span>, <span class="st">"Cylinders"</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mtcars_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Cylinders
+Gears  4  6  8
+    3  1  2 12
+    4  8  4  0
+    5  2  1  2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B1. Add the addmargins() function to report on the sum totals of the</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     rows and columns of "mtcars_df" table</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">addmargins</span>(mtcars_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Cylinders
+Gears  4  6  8 Sum
+  3    1  2 12  15
+  4    8  4  0  12
+  5    2  1  2   5
+  Sum 11  7 14  32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># addmargins() function:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Displays the margins of the table, or the sum of each row and/or column</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to help understand differences among factors.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># There are more three gear cars than four or five gear cars and more eight</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cylinder cars than four or six cylinder cars.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># B2. Add prop.tables() function, and report on the proportional weight</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     of each value in the "mtcars_df" table</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(mtcars_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Cylinders
+Gears       4       6       8
+    3 0.03125 0.06250 0.37500
+    4 0.25000 0.12500 0.00000
+    5 0.06250 0.03125 0.06250</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prop.table() function:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Displays a table of proportions rather than sums. The default argument for</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 'margin=', the sum of all cells in the table will equal 1.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Therefore the largest proportion of cars have eight cylinders and </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># three gears, 37.5%, and 0% of the cars have eight cylinders and four gears.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1742184000000" data-listing-file-modified-sort="1742238541928" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="282">
-<div class="thumbnail">
-<p><a href="./posts/Module 9 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 9 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 9 Assignment/table.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 9 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 9 Assignment/index.html" class="no-external">Module 9 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 9 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 9 Assignment/index.html" class="no-external">An Exercise in tabular data!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 9 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Mar 17, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1741150800000" data-listing-file-modified-sort="1741195382869" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1547">
-<div class="thumbnail">
-<p><a href="./posts/Module 8 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 8 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 8 Assignment/anova.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 8 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 8 Assignment/index.html" class="no-external">Module 8 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 8 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 8 Assignment/index.html" class="no-external">An Exercise in ANOVA, analysis of variance!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 8 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Mar 5, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1740459600000" data-listing-file-modified-sort="1741104672974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="853">
-<div class="thumbnail">
-<p><a href="./posts/Module 7 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 7 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 7 Assignment/regression.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 7 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 7 Assignment/index.html" class="no-external">Module 7 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 7 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 7 Assignment/index.html" class="no-external">An Exercise in Simple and Multiple Regression!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 7 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Feb 25, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1739768400000" data-listing-file-modified-sort="1740508289706" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="645">
-<div class="thumbnail">
-<p><a href="./posts/Module 6 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 6 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 6 Assignment/normdist.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 6 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 6 Assignment/index.html" class="no-external">Module 6 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 6 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 6 Assignment/index.html" class="no-external">Random Variables &amp; Probability Distributions!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 6 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Feb 17, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1739250000000" data-listing-file-modified-sort="1739669558067" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="918">
-<div class="thumbnail">
-<p><a href="./posts/Module 5 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 5 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 5 Assignment/corr.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 5 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 5 Assignment/index.html" class="no-external">Module 5 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 5 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 5 Assignment/index.html" class="no-external">An exercise in Hypothesis Testing &amp; Correlation!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 5 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Feb 11, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1738904400000" data-listing-file-modified-sort="1739240551659" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="440">
-<div class="thumbnail">
-<p><a href="./posts/Module 4 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 4 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 4 Assignment/dice.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 4 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 4 Assignment/index.html" class="no-external">Module 4 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 4 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 4 Assignment/index.html" class="no-external">An exercise in probability!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 4 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Feb 7, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1738299600000" data-listing-file-modified-sort="1738977651541" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="284">
-<div class="thumbnail">
-<p><a href="./posts/Module 3 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 3 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 3 Assignment/programmer.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 3 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 3 Assignment/index.html" class="no-external">Module 3 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 3 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 3 Assignment/index.html" class="no-external">An exercise in descriptive statistics!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 3 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Jan 31, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1737694800000" data-listing-file-modified-sort="1738374713199" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
-<div class="thumbnail">
-<p><a href="./posts/Module 2 Assignment/index.html" class="no-external"></a></p><a href="./posts/Module 2 Assignment/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Module 2 Assignment/mean-arithmetic.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Module 2 Assignment/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Module 2 Assignment/index.html" class="no-external">Module 2 Assignment</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Module 2 Assignment/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Module 2 Assignment/index.html" class="no-external">This Function Calculates The Mean!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Module 2 Assignment/index.html" class="no-external">
-<div class="listing-date">
-Jan 24, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1737435600000" data-listing-file-modified-sort="1737778965282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="10">
-<div class="thumbnail">
-<p><a href="./posts/Welcome/index.html" class="no-external"></a></p><a href="./posts/Welcome/index.html" class="no-external">
-<p class="card-img-top"><img src="posts\Welcome\thumbnail.jpg"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/Welcome/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Welcome/index.html" class="no-external">Welcome To My Blog</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Welcome/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/Welcome/index.html" class="no-external">This is the first post in my LIS4273 blog. Welcome!</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Welcome/index.html" class="no-external">
-<div class="listing-date">
-Jan 21, 2025
-</div>
-<div class="listing-author">
-Robert Walsh
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
