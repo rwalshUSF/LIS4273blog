@@ -1,0 +1,192 @@
+---
+title: "Module 10 Assignment"
+author: "Robert Walsh"
+image: "multivariate.jpg"
+date: "2025-03-25"
+---
+
+An Exercise in Multivariate Regression!
+
+```{r warning=FALSE,message=FALSE}
+# LIS4273 - Module 10. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# Conduct ANOVA (analysis of variance) and Regression coefficients to 
+# the data from data (" cystfibr ") database. You can choose any variable 
+# you like to interpret.
+library(ISwR)
+data("cystfibr")
+attach(cystfibr)
+
+#-------------------------------------------------------------------------#
+# A1. In the report, please state the result of coefficients and 
+# significance to any variables you like both under ANOVA and multivariate 
+# analysis. Please provide a specific interpretation of R results.
+
+# model:
+# 'bmp' as a function of 'age'+'height'+'weight'+'rv'+'frc'+'tlc'+'pemax'
+bmpModelOne<-lm(bmp~age+height+weight+rv+frc+tlc+pemax,data=cystfibr)
+# The Coefficients:
+bmpModelOne
+# The intercept is 138.94756 
+# Therefore, the estimated body mass percentage of normal would be
+# around 139 if all predictor variables were 0.
+
+# age: indicates that for each increment of 1 in age, a person’s 'bmp' 
+# decreases by 2.34798 with all other variables constant.
+
+# height: indicates that for each increment of 1 in height, a person’s 'bmp' 
+# decreases by 0.34820 with all other variables constant.
+
+# weight: indicates that for each increment of 1 in weight, a person’s 'bmp' 
+# increases by 1.42015 with all other variables constant.
+
+# Summary of the regression model to seek significant relationships
+# among the variables:
+summary(bmpModelOne)
+# This analysis suggests that 'age', 'height', and 'weight' are significant
+# to 'bmp', and that 'rv', 'frc', 'tlc', and 'pemax' could be removed from
+# the model without significantly affecting the dependent variable outcomes &
+# the F-statistic of 17.36 with a p-value of 1.357e-06 suggests that at least
+# one predictor variable is significantly related to the response variable.
+
+#---------------------------------------------------------------------------#
+# ANOVA of the regression model to seek significant relationships
+# among the variables:
+anova(bmpModelOne)
+# This analysis suggests that 'age','height','weight','rv', and 'tlc' are 
+# significant to 'bmp' and 'frc' & 'pemax' could be removed from
+# the model without significantly affecting the dependent variable outcomes.
+# The ANOVA table indicates that there is no significant improvement of the
+# model once 'age','height','weight','rv', and 'tlc' are included.
+
+# Perform a joint test to determine if 'frc' & 'pemax' could be removed from
+# the model without significantly affecting the dependent variable outcomes.
+bmpModelTwo<-lm(bmp~age+height+weight+rv+tlc,data=cystfibr)
+anova(bmpModelOne,bmpModelTwo)
+# The ANOVA table suggests we can remove 'frc' & 'pemax'.
+# The large p-value 0.2017 provides good evidence that 'model 2' with five
+# predictors fits as well as 'model 1' with seven predictors.
+
+#---------------------------------------------------------------------------#
+
+# Dropping 'pemax' from the analysis may result in losing valuable data
+# Therefore, a Multivariate Multiple Regression will model multiple dependent
+# variables, with a single set of predictor variables.
+
+# model:
+# 'bmp' and 'pemax' as a function of 'age'+'height'+'weight'+'rv'+'frc'+'tlc'
+mlm1<-lm(cbind(cystfibr$bmp,cystfibr$pemax)~age+height+weight+rv+frc+tlc)
+# Summary of the Multivariate Multiple Regression model to seek significant 
+# relationships among the variables:
+summary(mlm1)
+# Is a predictor variable jointly contributing to both models?
+
+# The model for Response 'cystfibr$bmp' suggests that at least one 
+# predictor variable is significantly related to the response variable.
+# F-statistic:  18.2 & p-value: 9.551e-07
+# 'age','height','weight',and 'tlc' are significant
+
+# The model for Response 'cystfibr$pemax' suggests that at least one 
+# predictor variable is significantly related to the response variable.
+# F-statistic: 3.048 & p-value: 0.03083
+# No predictors indicate significance, the p-value: 0.03083 does.
+
+# Determining whether or not to include predictors in a multivariate multiple
+# regression requires the use of multivariate test statistics (Ford, 2024)
+# The easiest way to do this is to use the Anova() function
+# in the car package (Fox and Weisberg, 2011)
+library(car)
+Anova(mlm1)
+# The Type II MANOVA Tests suggest 'height','rv','frc',and 'tlc' are
+# jointly insignificant for the two models
+
+# Check to see if a model with just 'age' and 'weight' fits as well as 
+# a model with all six predictors.
+# Fit a smaller model and then compare the smaller model to the larger
+# model using the anova() function (Ford, 2024)
+mlm2<-lm(cbind(cystfibr$bmp,cystfibr$pemax)~age+weight)
+anova(mlm1,mlm2)
+# The large p-value 0.1116 provides good evidence that the model with
+# two predictors fits as well as the model with six predictors.
+
+
+#------------------------------------------------------------------------#
+
+# Question B.
+
+# The secher data("secher") are best analyzed after log-transforming birth
+# weight as well as the abdominal and biparietal diameters. Fit a prediction
+# weight as well as abdominal and biparietal diameters.
+data("secher")
+attach(secher)
+# Fit linear regression for 'bwt' using the log transformed 'ad'
+# Model with only abdominal diameter:
+model_ad<-lm(log(bwt)~I(log(ad)),data=secher)
+summary(model_ad)
+# Fit linear regression for 'bwt' using the log transformed 'bpd'
+# Model with only biparietal diameter:
+model_bpd<-lm(log(bwt)~I(log(bpd)),data=secher)
+summary(model_bpd)
+# Fit linear regression for 'bwt' using the log transformed 'ad' + 'bpd'
+# Combine both models:
+model_combined<-lm(log(bwt)~I(log(ad))+I(log(bpd)),data=secher)
+summary(model_combined)
+# For a prediction equation for birth weight.
+
+# birthweight = -5.8615 + 1.4667(abdominal) + 1.5519(biparietal)
+
+# B1. How much is gained by using both diameters in a prediction equation?
+r_sq_model_ad<-summary(model_ad)$r.squared
+r_sq_model_bpd<-summary(model_bpd)$r.squared
+r_sq_model_combined<-summary(model_combined)$r.squared
+r_sq_gain<-r_sq_model_combined - mean(c(r_sq_model_ad,r_sq_model_bpd))
+cat("The Avg. Gain in R-sq is approx:", r_sq_gain, "\n")
+# The sum of the two regression coefficients is almost identical and 
+# equal to 3.
+
+# B2. Can this be given a nice interpretation to our analysis?
+# Please provide step by step on your analysis and code you use
+# to find out the result. 
+
+# The regression coefficients for log(ad) and log(bpd) are approx.(1.5) each.
+# Their sum is approx. (3).
+cat("Regression coefficients:","\n",
+"Abdominal diameter:", coef(model_combined)[2],"\n",
+"Biparietal diameter:", coef(model_combined)[3],"\n",
+"Sum of coefficients:", coef(model_combined)[2] + coef(model_combined)[3],"\n")
+# This suggests that a 1% increase in both abdominal and biparietal diameters 
+# is associated with an approximate 3% increase in birth weight.
+
+# Model without log-transformation:
+model_reg<-lm(bwt~ad+bpd,data=secher)
+# Predict 'bwt' for 1% increase in both 'ad' & 'bpd'
+predict(model_reg,data.frame(ad=c(95,96),bpd=c(95,96)))
+# Calculate percent increase
+percentIncrease<-((2753.895-2676.999)/2676.999)*100
+cat("For a 1% increase from 95mm to 96mm in both 'ad' & 'bpd'
+The 'bwt' gain in grams is approx:", percentIncrease, "%")
+# B3. Just an additional question (This will not be graded).
+# When should we consider "log-transforming" a dataset?
+# This is a very common practice in data science. 
+
+cat("When simplifying complex relationships. For example,
+some relationships between variables might be difficult to interpret 
+in the original scale. Log-transforming could simplify the complex
+relationships, making them easier to understand and model.")
+
+
+
+
+
+
+
+# References:
+```
+
+Fox, J and Weisberg, S (2011). An {R} Companion to Applied Regression, Second Edition. Thousand Oaks CA: Sage. URL: http://socserv.socsci.mcmaster.ca/jfox/Books/Companion
+
+Ford, C (2024). Getting started with Multivariate Multiple Regression with R blog posting. Hosted by the University of Virginia Library.

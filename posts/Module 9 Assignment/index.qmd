@@ -57,4 +57,3 @@ prop.table(mtcars_df)
 # Therefore the largest proportion of cars have eight cylinders and 
 # three gears, 37.5%, and 0% of the cars have eight cylinders and four gears.
 ```
-
