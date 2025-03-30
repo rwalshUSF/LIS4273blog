@@ -2,7 +2,7 @@
 title: "Module 11 Assignment"
 author: "Robert Walsh"
 image: "LogReg.jpg"
-date: "2025-03-29"
+date: "2025-03-30"
 ---
 
 Exercises in GLM, Matrices, and Logistic Regression!
@@ -44,17 +44,43 @@ plac<-data.frame(vas=vas.plac,subject,treat=0,period=grp)
 # converted to factors as well as the subject count.
 
 combinedData<-rbind(act,plac)
-
+combinedData$treat<-factor(combinedData$treat,
+                           labels=c("placebo","active"))
+combinedData$period<-factor(combinedData$period,
+                           labels=c("placFirst","actFirst"))
+summary(combinedData)
 # Now the data frame can be modeled to compare the predictor variables 
 # to the response variable to see if there is a significant statistical
 # difference to 'var' values from the additive effects of:
-# 'subject'+'period'+'treat'
+# 'subject'+'treat' to see if the placebo or active treatments
+# had a significant effect on vas scores among the 16 subjects.
 
-addModel<-lm(vas~subject+period+treat,data=combinedData)
-summary(addModel)
-# The results show that with an F-statistic of 2.914 and a 
-# p-value of 0.02229, the model is significant.
-# For the increase from 0-1 in 'treat', 'vas' decreased by 42.87
+# Plot the result
+attach(combinedData)
+plot(as.numeric(subject),vas,pch=as.numeric(treat),
+     xlab="Subject #", ylab="vas score",col=treat)
+legend(x=1,legend=c("placebo","active"),
+       col=c("black","red"),pch=1:2)
+axis(1, at = c(1:16))
+
+# Specify regression line data
+vas.placebo<-combinedData[treat=="placebo",]
+vas.active<-combinedData[treat=="active",]
+
+# Fit GLM models for effects of treatment on vas scores by subject
+glm.placebo<-glm(vas~as.numeric(subject),data=vas.placebo)
+glm.active<-glm(vas~as.numeric(subject),data=vas.active)
+abline(glm.placebo,col="black")
+abline(glm.active,col="red")
+# Regression analysis
+summary(glm.placebo)
+# The results show that with a t-value of 0.900 and a 
+# p-value of 0.384, the placebo treatment did not have a significant
+# enough effect on vas scores among the 16 subjects to reject the null.
+summary(glm.active)
+# The results show that with a t-value of 2.211 and a 
+# p-value of 0.0442, the active treatment had a significant
+# effect on vas scores among the 16 subjects. We can reject the null.
 
 # Perform t tests
 
@@ -68,14 +94,6 @@ tTest1
 # treatment group showing lower mean 'vas' score compared to the placebo group.
 # The p-value is similar to the p-value from the model summary which
 # indicated that 'treat' was statistically significant.
-
-tTest2<-t.test(vas~period,data=combinedData)
-tTest2
-# When testing to determine if 'period' affects 'vas'
-# The t test results state that the t-statistic is -1.8995
-# with 29.872 degree if freedom. Because the p-value 0.0672 is greater than
-# alpha 0.05 we fail to reject the null. There is not enough evidence to
-# conclude that the 'period' significantly affected the mean 'vas' scores. 
 
 # Question B
 
