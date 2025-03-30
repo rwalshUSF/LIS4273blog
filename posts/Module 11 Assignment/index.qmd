@@ -1,0 +1,141 @@
+---
+title: "Module 11 Assignment"
+author: "Robert Walsh"
+image: "LogReg.jpg"
+date: "2025-03-29"
+---
+
+Exercises in GLM, Matrices, and Logistic Regression!
+
+```{r warning=FALSE,message=FALSE}
+# LIS4273 - Module 11. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# Set up an additive model for the ashina data, as part of ISwR package
+library(ISwR)
+data("ashina")
+attach(ashina)
+# This data contain additive effects on subjects, period and treatment.
+# Compare the results with those obtained from t tests. 
+head(ashina,5)
+# Create a new 'ashina$subject' column as a factor w/ values 1-16
+ashina$subject<-factor(1:16)
+head(ashina,5)
+summary(ashina)
+# Create two data frames:
+
+# 'act' Given active substance & 'plac' given Placebo
+# Include a 'vas' column for the 'vas' summary score value,
+# a 'subject' column for the factored numeric subject count,
+# a 'treat' column (1 for 'active' & 0 for 'placebo')
+# to distinguish between treatment in binary format,
+# and a 'period' column to identify the group number from 'ashina$grp'
+# where '1' got placebo first & '2' got active first.
+
+attach(ashina)
+act<-data.frame(vas=vas.active,subject,treat=1,period=grp)
+plac<-data.frame(vas=vas.plac,subject,treat=0,period=grp)
+
+# In order to fit an additive model, the 'act' & 'plac' data.frames must be
+# combined together using the rbind() function and the binary values
+# converted to factors as well as the subject count.
+
+combinedData<-rbind(act,plac)
+
+# Now the data frame can be modeled to compare the predictor variables 
+# to the response variable to see if there is a significant statistical
+# difference to 'var' values from the additive effects of:
+# 'subject'+'period'+'treat'
+
+addModel<-lm(vas~subject+period+treat,data=combinedData)
+summary(addModel)
+# The results show that with an F-statistic of 2.914 and a 
+# p-value of 0.02229, the model is significant.
+# For the increase from 0-1 in 'treat', 'vas' decreased by 42.87
+
+# Perform t tests
+
+tTest1<-t.test(vas~treat,data=combinedData)
+tTest1
+# When testing to determine if 'treat' affects 'vas'
+# The t test results state that the t-statistic is 2.4699
+# with 24.063 degrees of freedom. Because the p-value 0.02099 is less than
+# alpha 0.05 the null hypothesis would be rejected.This concludes that both
+# treatments have a significant effect on the 'vas' scores with the active
+# treatment group showing lower mean 'vas' score compared to the placebo group.
+# The p-value is similar to the p-value from the model summary which
+# indicated that 'treat' was statistically significant.
+
+tTest2<-t.test(vas~period,data=combinedData)
+tTest2
+# When testing to determine if 'period' affects 'vas'
+# The t test results state that the t-statistic is -1.8995
+# with 29.872 degree if freedom. Because the p-value 0.0672 is greater than
+# alpha 0.05 we fail to reject the null. There is not enough evidence to
+# conclude that the 'period' significantly affected the mean 'vas' scores. 
+
+# Question B
+
+# Consider the following
+a<-gl(2,2,8) # Creates factor with 2 levels,each repeated 2 times,length 8
+b<-gl(2,4,8) # Creates factor with 2 levels,each repeated 4 times,length 8
+x<-1:8
+y<-c(1:4,8:5)
+z<-rnorm(8)
+
+# Instruction: The rnorm() is a built-in R function that generates a vector
+# of normally distributed random numbers. The rnorm() method takes a sample
+# size as input and generates that many random numbers. We are looking for
+# two models: (1) model.matrix (~a:b); (2) lm (z~a:b)
+
+# B1. Your assignment is to generate the model matrices for the following models
+
+# z ~ a*b  # Model with interaction (a*b)
+
+mm1<-model.matrix(~a*b)
+mm1
+fmm1<-lm(z~a*b)
+summary(fmm1)
+# z ~ a:b  # Model with only interaction term (a:b)
+
+mm2<-model.matrix(~a:b)
+mm2
+fmm2<-lm(z~a:b)
+summary(fmm2)
+# B2. Please also discuss the implications of using these two models;
+# please be reminded about the model fits and notice
+# which models contain singularities.
+
+# Interaction Model Matrix
+mm1
+# This design matrix will include columns for the main effects of a and b,
+# as well as their interaction term (a:b).
+
+# Interaction-term-Only Model Matrix
+mm2
+# This design matrix will only include the interaction term (a:b),
+# without main effects. 
+
+# Interaction Model Fit
+summary(fmm1)
+# This model will estimate the effects of a, b,
+# and their interaction on the response variable z
+
+# Interaction-term-Only Model Fit
+summary(fmm2)
+# This model will estimate the effect of the interaction term a:b on z,
+# assuming no separate effects for a or b.
+# A singularity occurs here, probably because the main effects of a and b 
+# are highly correlated with the interaction term, and it doesn't account 
+# for the separate effects.
+
+# Both models have the same R-squared value, 0.4907, indicating similar
+# explanatory power. However, the significance levels of the coefficients
+# differ between the two models. In the interaction model, you can assess 
+# the significance of the main effects and the interaction term separately.
+# In the interaction-term-only model, you can only assess the significance of 
+# the interaction term.
+```
