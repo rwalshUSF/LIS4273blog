@@ -335,10 +335,104 @@ Number of Fisher Scoring iterations: 2</code></pre>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value of 0.0442, the active treatment had a significant</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># effect on vas scores among the 16 subjects. We can reject the null.</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform t tests</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>tTest1<span class="ot">&lt;-</span><span class="fu">t.test</span>(vas<span class="sc">~</span>treat,<span class="at">data=</span>combinedData)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>tTest1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create 'logit' function for logistic regression</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>logit  <span class="ot">&lt;-</span> <span class="cf">function</span>(p) <span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># GLM Model to determine if 'vas, subject, or period' predictor variables</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># increases or decreases the odds of the outcome 'treat' group</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(treat <span class="sc">~</span> .,<span class="at">family =</span> <span class="fu">binomial</span>(logit), <span class="at">data=</span>combinedData)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = treat ~ ., family = binomial(logit), data = combinedData)
+
+Coefficients: (1 not defined because of singularities)
+               Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)    -8.08937    3.50126  -2.310  0.02087 * 
+vas            -0.06014    0.02057  -2.923  0.00346 **
+subject2        3.09742    3.71629   0.833  0.40458   
+subject3        7.30749    4.40133   1.660  0.09686 . 
+subject4        5.83397    5.94041   0.982  0.32606   
+subject5        7.51800    3.82633   1.965  0.04944 * 
+subject6        1.89454    5.06324   0.374  0.70827   
+subject7        7.18721    3.59417   2.000  0.04553 * 
+subject8        7.93901    3.96059   2.005  0.04502 * 
+subject9        4.84159    3.07156   1.576  0.11497   
+subject10       6.97670    3.72291   1.874  0.06093 . 
+subject11       7.30749    3.76965   1.939  0.05256 . 
+subject12       9.29225    4.10554   2.263  0.02361 * 
+subject13       7.87886    3.73104   2.112  0.03471 * 
+subject14       7.51800    3.65361   2.058  0.03962 * 
+subject15       5.95426    3.85548   1.544  0.12250   
+subject16       4.84159    3.16071   1.532  0.12557   
+periodactFirst       NA         NA      NA       NA   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 44.361  on 31  degrees of freedom
+Residual deviance: 28.281  on 15  degrees of freedom
+AIC: 62.281
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use AIC to fit model selection</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">step</span>(model,<span class="at">data=</span>combinedData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=62.28
+treat ~ vas + subject + period
+
+
+Step:  AIC=62.28
+treat ~ vas + subject
+
+          Df Deviance    AIC
+- subject 15   38.342 42.342
+&lt;none&gt;         28.281 62.281
+- vas      1   44.361 76.361
+
+Step:  AIC=42.34
+treat ~ vas
+
+       Df Deviance    AIC
+&lt;none&gt;      38.342 42.342
+- vas   1   44.361 46.361</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = treat ~ vas, family = binomial(logit), data = combinedData)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) -0.639381   0.471332  -1.357   0.1749  
+vas         -0.019715   0.009389  -2.100   0.0357 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 44.361  on 31  degrees of freedom
+Residual deviance: 38.342  on 30  degrees of freedom
+AIC: 42.342
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The results show that the estimates (log odds) are negative for 'vas'</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A negative log-odds ratio means that the odds go down with an</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># increase in the value of the predictor variable.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Therefore the odds of determining a treatment group 'treat' decreases</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with observed/summarized 'vas' score increases. </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># A Z-value of -2.100 and a p value of 0.0357, suggest that we can reject</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># the null, and that 'vas' has a significant effect on 'treat'.</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform t test</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>tTest1<span class="ot">&lt;-</span><span class="fu">t.test</span>(vas<span class="sc">~</span>treat,<span class="at">data=</span>combinedData)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>tTest1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -352,35 +446,39 @@ sample estimates:
 mean in group placebo  mean in group active 
              -13.9375              -56.8125 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># When testing to determine if 'treat' affects 'vas'</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The t test results state that the t-statistic is 2.4699</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with 24.063 degrees of freedom. Because the p-value 0.02099 is less than</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha 0.05 the null hypothesis would be rejected.This concludes that both</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># treatments have a significant effect on the 'vas' scores with the active</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># treatment group showing lower mean 'vas' score compared to the placebo group.</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The p-value is similar to the p-value from the model summary which</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># indicated that 'treat' was statistically significant.</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Question B</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider the following</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">gl</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">8</span>) <span class="co"># Creates factor with 2 levels,each repeated 2 times,length 8</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="fu">gl</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>) <span class="co"># Creates factor with 2 levels,each repeated 4 times,length 8</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">8</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>z<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">8</span>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Instruction: The rnorm() is a built-in R function that generates a vector</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># of normally distributed random numbers. The rnorm() method takes a sample</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># size as input and generates that many random numbers. We are looking for</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co"># two models: (1) model.matrix (~a:b); (2) lm (z~a:b)</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># B1. Your assignment is to generate the model matrices for the following models</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a*b  # Model with interaction (a*b)</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>mm1<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">*</span>b)</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>mm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># When testing to determine if 'treat' affects 'vas'</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The t test results state that the t-statistic is 2.4699</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with 24.063 degrees of freedom. Because the p-value 0.02099 is less than</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha 0.05 the null hypothesis would be rejected.This concludes that both</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># treatments have a significant effect on the 'vas' scores with the active</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># treatment group showing lower mean 'vas' score compared to the placebo group.</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The p-value is similar to the p-value from the model summary which</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># indicated that 'treat' was statistically significant.</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------#</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Question B</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider the following</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">gl</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">8</span>) <span class="co"># Creates factor with 2 levels,each repeated 2 times,length 8</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="fu">gl</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>) <span class="co"># Creates factor with 2 levels,each repeated 4 times,length 8</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">8</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>z<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">8</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Instruction: The rnorm() is a built-in R function that generates a vector</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># of normally distributed random numbers. The rnorm() method takes a sample</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># size as input and generates that many random numbers. We are looking for</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># two models: (1) model.matrix (~a:b); (2) lm (z~a:b)</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co"># B1. Your assignment is to generate the model matrices for the following models</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a*b  # Model with interaction (a*b)</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>mm1<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">*</span>b)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>mm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a2 b2 a2:b2
 1           1  0  0     0
@@ -400,8 +498,8 @@ attr(,"contrasts")$a
 attr(,"contrasts")$b
 [1] "contr.treatment"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fmm1<span class="ot">&lt;-</span><span class="fu">lm</span>(z<span class="sc">~</span>a<span class="sc">*</span>b)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fmm1<span class="ot">&lt;-</span><span class="fu">lm</span>(z<span class="sc">~</span>a<span class="sc">*</span>b)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -409,23 +507,23 @@ lm(formula = z ~ a * b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.9126  0.9126 -1.1786  1.1786  0.9534 -0.9534 -0.4426  0.4426 
+-0.5625  0.5625 -0.5356  0.5356 -0.8190  0.8190 -0.3575  0.3575 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.11255    0.91198  -0.123    0.908
-a2          -0.01965    1.28974  -0.015    0.989
-b2           0.23658    1.28974   0.183    0.863
-a2:b2        0.69323    1.82396   0.380    0.723
+(Intercept)   0.5594     0.5920   0.945    0.398
+a2            0.5037     0.8372   0.602    0.580
+b2           -0.1446     0.8372  -0.173    0.871
+a2:b2        -2.0877     1.1839  -1.763    0.153
 
-Residual standard error: 1.29 on 4 degrees of freedom
-Multiple R-squared:  0.1457,    Adjusted R-squared:  -0.4951 
-F-statistic: 0.2273 on 3 and 4 DF,  p-value: 0.8732</code></pre>
+Residual standard error: 0.8372 on 4 degrees of freedom
+Multiple R-squared:  0.6659,    Adjusted R-squared:  0.4154 
+F-statistic: 2.658 on 3 and 4 DF,  p-value: 0.1843</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a:b  # Model with only interaction term (a:b)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>mm2<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">:</span>b)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a:b  # Model with only interaction term (a:b)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>mm2<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">:</span>b)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>mm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a1:b1 a2:b1 a1:b2 a2:b2
 1           1     1     0     0     0
@@ -445,8 +543,8 @@ attr(,"contrasts")$a
 attr(,"contrasts")$b
 [1] "contr.treatment"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fmm2<span class="ot">&lt;-</span><span class="fu">lm</span>(z<span class="sc">~</span>a<span class="sc">:</span>b)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fmm2<span class="ot">&lt;-</span><span class="fu">lm</span>(z<span class="sc">~</span>a<span class="sc">:</span>b)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -454,26 +552,28 @@ lm(formula = z ~ a:b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.9126  0.9126 -1.1786  1.1786  0.9534 -0.9534 -0.4426  0.4426 
+-0.5625  0.5625 -0.5356  0.5356 -0.8190  0.8190 -0.3575  0.3575 
 
 Coefficients: (1 not defined because of singularities)
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   0.7976     0.9120   0.875    0.431
-a1:b1        -0.9102     1.2897  -0.706    0.519
-a2:b1        -0.9298     1.2897  -0.721    0.511
-a1:b2        -0.6736     1.2897  -0.522    0.629
-a2:b2             NA         NA      NA       NA
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  -1.1692     0.5920  -1.975    0.119  
+a1:b1         1.7287     0.8372   2.065    0.108  
+a2:b1         2.2324     0.8372   2.667    0.056 .
+a1:b2         1.5841     0.8372   1.892    0.131  
+a2:b2             NA         NA      NA       NA  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.29 on 4 degrees of freedom
-Multiple R-squared:  0.1457,    Adjusted R-squared:  -0.4951 
-F-statistic: 0.2273 on 3 and 4 DF,  p-value: 0.8732</code></pre>
+Residual standard error: 0.8372 on 4 degrees of freedom
+Multiple R-squared:  0.6659,    Adjusted R-squared:  0.4154 
+F-statistic: 2.658 on 3 and 4 DF,  p-value: 0.1843</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B2. Please also discuss the implications of using these two models;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># please be reminded about the model fits and notice</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># which models contain singularities.</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction Model Matrix</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>mm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B2. Please also discuss the implications of using these two models;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># please be reminded about the model fits and notice</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># which models contain singularities.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction Model Matrix</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>mm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a2 b2 a2:b2
 1           1  0  0     0
@@ -493,11 +593,11 @@ attr(,"contrasts")$a
 attr(,"contrasts")$b
 [1] "contr.treatment"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This design matrix will include columns for the main effects of a and b,</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># as well as their interaction term (a:b).</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction-term-Only Model Matrix</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>mm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This design matrix will include columns for the main effects of a and b,</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># as well as their interaction term (a:b).</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction-term-Only Model Matrix</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>mm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a1:b1 a2:b1 a1:b2 a2:b2
 1           1     1     0     0     0
@@ -517,11 +617,11 @@ attr(,"contrasts")$a
 attr(,"contrasts")$b
 [1] "contr.treatment"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This design matrix will only include the interaction term (a:b),</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># without main effects. </span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction Model Fit</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This design matrix will only include the interaction term (a:b),</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># without main effects. </span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction Model Fit</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -529,24 +629,24 @@ lm(formula = z ~ a * b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.9126  0.9126 -1.1786  1.1786  0.9534 -0.9534 -0.4426  0.4426 
+-0.5625  0.5625 -0.5356  0.5356 -0.8190  0.8190 -0.3575  0.3575 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.11255    0.91198  -0.123    0.908
-a2          -0.01965    1.28974  -0.015    0.989
-b2           0.23658    1.28974   0.183    0.863
-a2:b2        0.69323    1.82396   0.380    0.723
+(Intercept)   0.5594     0.5920   0.945    0.398
+a2            0.5037     0.8372   0.602    0.580
+b2           -0.1446     0.8372  -0.173    0.871
+a2:b2        -2.0877     1.1839  -1.763    0.153
 
-Residual standard error: 1.29 on 4 degrees of freedom
-Multiple R-squared:  0.1457,    Adjusted R-squared:  -0.4951 
-F-statistic: 0.2273 on 3 and 4 DF,  p-value: 0.8732</code></pre>
+Residual standard error: 0.8372 on 4 degrees of freedom
+Multiple R-squared:  0.6659,    Adjusted R-squared:  0.4154 
+F-statistic: 2.658 on 3 and 4 DF,  p-value: 0.1843</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effects of a, b,</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and their interaction on the response variable z</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction-term-Only Model Fit</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effects of a, b,</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and their interaction on the response variable z</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction-term-Only Model Fit</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -554,32 +654,34 @@ lm(formula = z ~ a:b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.9126  0.9126 -1.1786  1.1786  0.9534 -0.9534 -0.4426  0.4426 
+-0.5625  0.5625 -0.5356  0.5356 -0.8190  0.8190 -0.3575  0.3575 
 
 Coefficients: (1 not defined because of singularities)
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   0.7976     0.9120   0.875    0.431
-a1:b1        -0.9102     1.2897  -0.706    0.519
-a2:b1        -0.9298     1.2897  -0.721    0.511
-a1:b2        -0.6736     1.2897  -0.522    0.629
-a2:b2             NA         NA      NA       NA
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  -1.1692     0.5920  -1.975    0.119  
+a1:b1         1.7287     0.8372   2.065    0.108  
+a2:b1         2.2324     0.8372   2.667    0.056 .
+a1:b2         1.5841     0.8372   1.892    0.131  
+a2:b2             NA         NA      NA       NA  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.29 on 4 degrees of freedom
-Multiple R-squared:  0.1457,    Adjusted R-squared:  -0.4951 
-F-statistic: 0.2273 on 3 and 4 DF,  p-value: 0.8732</code></pre>
+Residual standard error: 0.8372 on 4 degrees of freedom
+Multiple R-squared:  0.6659,    Adjusted R-squared:  0.4154 
+F-statistic: 2.658 on 3 and 4 DF,  p-value: 0.1843</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effect of the interaction term a:b on z,</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming no separate effects for a or b.</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A singularity occurs here, probably because the main effects of a and b </span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># are highly correlated with the interaction term, and it doesn't account </span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># for the separate effects.</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Both models have the same R-squared value, 0.4907, indicating similar</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># explanatory power. However, the significance levels of the coefficients</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># differ between the two models. In the interaction model, you can assess </span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># the significance of the main effects and the interaction term separately.</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># In the interaction-term-only model, you can only assess the significance of </span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the interaction term.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effect of the interaction term a:b on z,</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming no separate effects for a or b.</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A singularity occurs here, probably because the main effects of a and b </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># are highly correlated with the interaction term, and it doesn't account </span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># for the separate effects.</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Both models have the same R-squared value, 0.4907, indicating similar</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># explanatory power. However, the significance levels of the coefficients</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># differ between the two models. In the interaction model, you can assess </span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># the significance of the main effects and the interaction term separately.</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># In the interaction-term-only model, you can only assess the significance of </span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the interaction term.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -677,7 +779,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/rwalshusf\.quarto\.pub\/lis4273blog");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

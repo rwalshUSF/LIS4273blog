@@ -82,7 +82,25 @@ summary(glm.active)
 # p-value of 0.0442, the active treatment had a significant
 # effect on vas scores among the 16 subjects. We can reject the null.
 
-# Perform t tests
+# Create 'logit' function for logistic regression
+logit  <- function(p) log(p/(1-p))
+
+# GLM Model to determine if 'vas, subject, or period' predictor variables
+# increases or decreases the odds of the outcome 'treat' group
+model <- glm(treat ~ .,family = binomial(logit), data=combinedData)
+summary(model)
+# Use AIC to fit model selection
+model2 <- step(model,data=combinedData)
+summary(model2)
+# The results show that the estimates (log odds) are negative for 'vas'
+# A negative log-odds ratio means that the odds go down with an
+# increase in the value of the predictor variable.
+# Therefore the odds of determining a treatment group 'treat' decreases
+# with observed/summarized 'vas' score increases. 
+# A Z-value of -2.100 and a p value of 0.0357, suggest that we can reject
+# the null, and that 'vas' has a significant effect on 'treat'.
+
+# Perform t test
 
 tTest1<-t.test(vas~treat,data=combinedData)
 tTest1
@@ -94,6 +112,10 @@ tTest1
 # treatment group showing lower mean 'vas' score compared to the placebo group.
 # The p-value is similar to the p-value from the model summary which
 # indicated that 'treat' was statistically significant.
+
+
+#---------------------------------------------------------------------------#
+
 
 # Question B
 
