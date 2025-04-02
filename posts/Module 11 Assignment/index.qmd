@@ -92,7 +92,7 @@ summary(model)
 # Use AIC to fit model selection
 model2 <- step(model,data=combinedData)
 summary(model2)
-# The results show that the estimates (log odds) are negative for 'vas'
+# The results show that the estimates (log odds) -0.019715 are negative for 'vas'
 # A negative log-odds ratio means that the odds go down with an
 # increase in the value of the predictor variable.
 # Therefore the odds of determining a treatment group 'treat' decreases
