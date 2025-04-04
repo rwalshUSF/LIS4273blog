@@ -129,19 +129,19 @@ z<-rnorm(8)
 # Instruction: The rnorm() is a built-in R function that generates a vector
 # of normally distributed random numbers. The rnorm() method takes a sample
 # size as input and generates that many random numbers. We are looking for
-# two models: (1) model.matrix (~a:b); (2) lm (z~a:b)
+# two models: (1) model.matrix (z~a:b); (2) lm (z~a:b)
 
 # B1. Your assignment is to generate the model matrices for the following models
 
 # z ~ a*b  # Model with interaction (a*b)
 
-mm1<-model.matrix(~a*b)
+mm1<-model.matrix(z~a*b)
 mm1
 fmm1<-lm(z~a*b)
 summary(fmm1)
 # z ~ a:b  # Model with only interaction term (a:b)
 
-mm2<-model.matrix(~a:b)
+mm2<-model.matrix(z~a:b)
 mm2
 fmm2<-lm(z~a:b)
 summary(fmm2)
@@ -172,7 +172,7 @@ summary(fmm2)
 # are highly correlated with the interaction term, and it doesn't account 
 # for the separate effects.
 
-# Both models have the same R-squared value, 0.4907, indicating similar
+# Both models have the same R-squared value, indicating similar
 # explanatory power. However, the significance levels of the coefficients
 # differ between the two models. In the interaction model, you can assess 
 # the significance of the main effects and the interaction term separately.

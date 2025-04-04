@@ -471,13 +471,13 @@ mean in group placebo  mean in group active
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Instruction: The rnorm() is a built-in R function that generates a vector</span></span>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># of normally distributed random numbers. The rnorm() method takes a sample</span></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># size as input and generates that many random numbers. We are looking for</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># two models: (1) model.matrix (~a:b); (2) lm (z~a:b)</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="co"># two models: (1) model.matrix (z~a:b); (2) lm (z~a:b)</span></span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co"># B1. Your assignment is to generate the model matrices for the following models</span></span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a*b  # Model with interaction (a*b)</span></span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>mm1<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">*</span>b)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>mm1<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(z<span class="sc">~</span>a<span class="sc">*</span>b)</span>
 <span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>mm1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a2 b2 a2:b2
@@ -506,25 +506,23 @@ Call:
 lm(formula = z ~ a * b)
 
 Residuals:
-        1         2         3         4         5         6         7         8 
--0.453759  0.453759 -0.009601  0.009601  0.015909 -0.015909  0.033802 -0.033802 
+      1       2       3       4       5       6       7       8 
+ 1.7513 -1.7513 -0.4452  0.4452  0.5664 -0.5664  1.2722 -1.2722 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)  -1.4730     0.2277  -6.469  0.00294 **
-a2            1.2349     0.3220   3.835  0.01854 * 
-b2            0.2031     0.3220   0.631  0.56247   
-a2:b2         0.7566     0.4554   1.661  0.17196   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  -0.3927     1.1407  -0.344    0.748
+a2            0.8345     1.6131   0.517    0.632
+b2           -0.1630     1.6131  -0.101    0.924
+a2:b2        -0.6198     2.2813  -0.272    0.799
 
-Residual standard error: 0.322 on 4 degrees of freedom
-Multiple R-squared:  0.937, Adjusted R-squared:  0.8897 
-F-statistic: 19.83 on 3 and 4 DF,  p-value: 0.007287</code></pre>
+Residual standard error: 1.613 on 4 degrees of freedom
+Multiple R-squared:  0.1026,    Adjusted R-squared:  -0.5705 
+F-statistic: 0.1524 on 3 and 4 DF,  p-value: 0.9229</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a:b  # Model with only interaction term (a:b)</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>mm2<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(<span class="sc">~</span>a<span class="sc">:</span>b)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>mm2<span class="ot">&lt;-</span><span class="fu">model.matrix</span>(z<span class="sc">~</span>a<span class="sc">:</span>b)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>mm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept) a1:b1 a2:b1 a1:b2 a2:b2
@@ -553,22 +551,20 @@ Call:
 lm(formula = z ~ a:b)
 
 Residuals:
-        1         2         3         4         5         6         7         8 
--0.453759  0.453759 -0.009601  0.009601  0.015909 -0.015909  0.033802 -0.033802 
+      1       2       3       4       5       6       7       8 
+ 1.7513 -1.7513 -0.4452  0.4452  0.5664 -0.5664  1.2722 -1.2722 
 
 Coefficients: (1 not defined because of singularities)
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   0.7216     0.2277   3.169  0.03388 * 
-a1:b1        -2.1946     0.3220  -6.815  0.00242 **
-a2:b1        -0.9597     0.3220  -2.980  0.04073 * 
-a1:b2        -1.9915     0.3220  -6.185  0.00347 **
-a2:b2             NA         NA      NA       NA   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.34102    1.14065  -0.299    0.780
+a1:b1       -0.05165    1.61313  -0.032    0.976
+a2:b1        0.78287    1.61313   0.485    0.653
+a1:b2       -0.21467    1.61313  -0.133    0.901
+a2:b2             NA         NA      NA       NA
 
-Residual standard error: 0.322 on 4 degrees of freedom
-Multiple R-squared:  0.937, Adjusted R-squared:  0.8897 
-F-statistic: 19.83 on 3 and 4 DF,  p-value: 0.007287</code></pre>
+Residual standard error: 1.613 on 4 degrees of freedom
+Multiple R-squared:  0.1026,    Adjusted R-squared:  -0.5705 
+F-statistic: 0.1524 on 3 and 4 DF,  p-value: 0.9229</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B2. Please also discuss the implications of using these two models;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># please be reminded about the model fits and notice</span></span>
@@ -630,21 +626,19 @@ Call:
 lm(formula = z ~ a * b)
 
 Residuals:
-        1         2         3         4         5         6         7         8 
--0.453759  0.453759 -0.009601  0.009601  0.015909 -0.015909  0.033802 -0.033802 
+      1       2       3       4       5       6       7       8 
+ 1.7513 -1.7513 -0.4452  0.4452  0.5664 -0.5664  1.2722 -1.2722 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)  -1.4730     0.2277  -6.469  0.00294 **
-a2            1.2349     0.3220   3.835  0.01854 * 
-b2            0.2031     0.3220   0.631  0.56247   
-a2:b2         0.7566     0.4554   1.661  0.17196   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  -0.3927     1.1407  -0.344    0.748
+a2            0.8345     1.6131   0.517    0.632
+b2           -0.1630     1.6131  -0.101    0.924
+a2:b2        -0.6198     2.2813  -0.272    0.799
 
-Residual standard error: 0.322 on 4 degrees of freedom
-Multiple R-squared:  0.937, Adjusted R-squared:  0.8897 
-F-statistic: 19.83 on 3 and 4 DF,  p-value: 0.007287</code></pre>
+Residual standard error: 1.613 on 4 degrees of freedom
+Multiple R-squared:  0.1026,    Adjusted R-squared:  -0.5705 
+F-statistic: 0.1524 on 3 and 4 DF,  p-value: 0.9229</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effects of a, b,</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and their interaction on the response variable z</span></span>
@@ -657,22 +651,20 @@ Call:
 lm(formula = z ~ a:b)
 
 Residuals:
-        1         2         3         4         5         6         7         8 
--0.453759  0.453759 -0.009601  0.009601  0.015909 -0.015909  0.033802 -0.033802 
+      1       2       3       4       5       6       7       8 
+ 1.7513 -1.7513 -0.4452  0.4452  0.5664 -0.5664  1.2722 -1.2722 
 
 Coefficients: (1 not defined because of singularities)
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)   0.7216     0.2277   3.169  0.03388 * 
-a1:b1        -2.1946     0.3220  -6.815  0.00242 **
-a2:b1        -0.9597     0.3220  -2.980  0.04073 * 
-a1:b2        -1.9915     0.3220  -6.185  0.00347 **
-a2:b2             NA         NA      NA       NA   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept) -0.34102    1.14065  -0.299    0.780
+a1:b1       -0.05165    1.61313  -0.032    0.976
+a2:b1        0.78287    1.61313   0.485    0.653
+a1:b2       -0.21467    1.61313  -0.133    0.901
+a2:b2             NA         NA      NA       NA
 
-Residual standard error: 0.322 on 4 degrees of freedom
-Multiple R-squared:  0.937, Adjusted R-squared:  0.8897 
-F-statistic: 19.83 on 3 and 4 DF,  p-value: 0.007287</code></pre>
+Residual standard error: 1.613 on 4 degrees of freedom
+Multiple R-squared:  0.1026,    Adjusted R-squared:  -0.5705 
+F-statistic: 0.1524 on 3 and 4 DF,  p-value: 0.9229</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effect of the interaction term a:b on z,</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming no separate effects for a or b.</span></span>
@@ -680,7 +672,7 @@ F-statistic: 19.83 on 3 and 4 DF,  p-value: 0.007287</code></pre>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># are highly correlated with the interaction term, and it doesn't account </span></span>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># for the separate effects.</span></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Both models have the same R-squared value, 0.4907, indicating similar</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Both models have the same R-squared value, indicating similar</span></span>
 <span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># explanatory power. However, the significance levels of the coefficients</span></span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># differ between the two models. In the interaction model, you can assess </span></span>
 <span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># the significance of the main effects and the interaction term separately.</span></span>
