@@ -1,0 +1,86 @@
+---
+title: "Module 12 Assignment"
+author: "Robert Walsh"
+image: "timeseries.png"
+date: "2025-04-05"
+---
+
+Exercise in Time Series Regression!
+
+```{r}
+# LIS4273 - Module 12. Assignment
+# Robert Walsh
+# Professor Lingyao Li
+
+# Question A.
+
+# The table below represents charges for a student credit card. 
+```
+<img src="charges.png" alt="Girl in a jacket" width="500" height="600">
+```{r warning=FALSE,message=FALSE}
+# A1. Construct a time series plot using R.
+
+# Enter data:
+
+charge<-c(31.9,27,31.3,31,39.4,40.7,42.3,49.5,45,50,50.9,58.5,39.4,36.2,40.5,44.6,46.8,44.7,52.2,54,48.8 ,55.8,58.7,63.4)
+chargeTimeSeries<-ts(charge,frequency=12,start=c(2012,1))
+chargeTimeSeries
+# Plot the time series regression:
+plot.ts(chargeTimeSeries)
+
+
+# A2. Employ the Exponential Smoothing Model as outlined in Avril Voghlan's
+#     notes and report the statistical  outcome:
+chargeTimeSeriesForecasts<-HoltWinters(chargeTimeSeries)
+chargeTimeSeriesForecasts
+# The output of HoltWinters() estimates the alpha @ 0.4786973
+# Close to .50, suggesting that the forecasts are based on both
+# the past and future observations almost equal weight.
+
+# Plot with Exponential Smoothing:
+plot(chargeTimeSeriesForecasts)
+# The original time series in black, and the red line is the forecast.
+# The time series regression of forecasts is smoother.
+
+
+# The distance between the fitted value and the actual observed value.
+# Using the measure of accuracy, or sum of squared errors:
+chargeTimeSeriesForecasts$SSE
+
+
+# A3. Provide a discussion on the time series and Exponential Smoothing
+#     Model result you led to. 
+
+# This time series could be described using an additive model,
+# the seasonal and random fluctuations seem to be roughly constant
+# in size over time with an overall positive trend including
+# some annual seasonal increase/decrease trends as well:
+
+# The students spend the least at the beginning of the year,
+# a significant increase in the middle of the year,
+# and spend the most towards the end of the year.
+# There is a sharp decline in spending at the beginning of each new year.
+
+# To learn more about the component trends of the data set, the 
+# decompose() function can be used:
+chargeTimeSeriesComponents<-decompose(chargeTimeSeries)
+plot(chargeTimeSeriesComponents)
+# The top chart shows the observed data.
+
+# The trend shows an increase from 41.77083 in July 2012 to
+# 48.55417 in June of 2013.
+
+# The "seasonal" components:
+chargeTimeSeriesComponents$seasonal
+# These figures confirm the sharp -6.8986111 to -10.6986111 decline from
+# Jan. into Feb., the 6.8472222 increase in Aug. and the 12.7805556
+# increase in Dec.
+
+# Using simple exponential smoothing to make short-term future forecasts.
+library("forecast")
+chargeFutureForecast <- forecast(chargeTimeSeriesForecasts,h=12)
+plot(chargeFutureForecast)
+# This plot displays the prediction for 2014.
+
+```
+
