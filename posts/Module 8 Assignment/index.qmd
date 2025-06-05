@@ -8,10 +8,6 @@ date: "2025-03-05"
 An Exercise in ANOVA, analysis of variance!
 
 ```{r}
-# LIS4273 - Module 8. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # A researcher is interested in the effects of drug against

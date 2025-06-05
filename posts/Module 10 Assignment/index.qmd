@@ -8,10 +8,6 @@ date: "2025-03-25"
 An Exercise in Multivariate Regression!
 
 ```{r warning=FALSE,message=FALSE}
-# LIS4273 - Module 10. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # Conduct ANOVA (analysis of variance) and Regression coefficients to 

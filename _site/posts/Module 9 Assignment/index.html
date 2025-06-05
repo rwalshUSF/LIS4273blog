@@ -126,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">Robert Walsh</span></a>
+<span class="menu-text">About Me</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -177,27 +177,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>An Exercise in tabular data!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LIS4273 - Module 9. Assignment</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Robert Walsh</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Professor Lingyao Li</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question A.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Your data.frame is listed as below.</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Question A.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Your data.frame is listed as below.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Spain"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">27</span>, <span class="dv">30</span>, <span class="dv">38</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">52</span>, <span class="dv">48</span>, <span class="dv">45</span>, <span class="dv">37</span>),</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">salary =</span> <span class="fu">c</span>(<span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">purchased =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Please do the following:</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># A1. Generate a one-way table for "purchased"</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>oneWayPurchased<span class="ot">&lt;-</span><span class="fu">table</span>(df<span class="sc">$</span>purchased)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>oneWayPurchased</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"Spain"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Spain"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"France"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">44</span>, <span class="dv">27</span>, <span class="dv">30</span>, <span class="dv">38</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">52</span>, <span class="dv">48</span>, <span class="dv">45</span>, <span class="dv">37</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">salary =</span> <span class="fu">c</span>(<span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>, <span class="dv">6000</span>, <span class="dv">5000</span>, <span class="dv">7000</span>, <span class="dv">4000</span>, <span class="dv">8000</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">purchased =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Please do the following:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># A1. Generate a one-way table for "purchased"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>oneWayPurchased<span class="ot">&lt;-</span><span class="fu">table</span>(df<span class="sc">$</span>purchased)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>oneWayPurchased</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  No Yes 
@@ -355,7 +351,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/rwalshusf\.quarto\.pub\/advancedstatsblog");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

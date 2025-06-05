@@ -8,10 +8,6 @@ date: "2025-02-07"
 An exercise in probability!
 
 ```{r}
-# LIS4273 - Module 4. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-#
 table1<-data.frame("B"=c(10,20,30),"B1"=c(20,40,60),"Totals"=c(30,60,90),
 row.names = c("A","A1","Totals"))
 library(gridExtra)

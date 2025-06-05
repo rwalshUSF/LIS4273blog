@@ -8,10 +8,6 @@ date: "2025-04-04"
 Exercises in GLM, Matrices, and Logistic Regression!
 
 ```{r warning=FALSE,message=FALSE}
-# LIS4273 - Module 11. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # Set up an additive model for the ashina data, as part of ISwR package

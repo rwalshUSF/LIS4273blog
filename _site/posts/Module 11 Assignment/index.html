@@ -126,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">Robert Walsh</span></a>
+<span class="menu-text">About Me</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -177,19 +177,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Exercises in GLM, Matrices, and Logistic Regression!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LIS4273 - Module 11. Assignment</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Robert Walsh</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Professor Lingyao Li</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Question A.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up an additive model for the ashina data, as part of ISwR package</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISwR)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ashina"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ashina)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This data contain additive effects on subjects, period and treatment.</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the results with those obtained from t tests. </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ashina,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question A.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up an additive model for the ashina data, as part of ISwR package</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISwR)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ashina"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ashina)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This data contain additive effects on subjects, period and treatment.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the results with those obtained from t tests. </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ashina,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  vas.active vas.plac grp
 1       -167     -102   1
@@ -504,18 +500,18 @@ lm(formula = z ~ a * b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.2766  0.2766 -0.3711  0.3711 -0.6979  0.6979 -0.8791  0.8791 
+-0.7144  0.7144  0.3018 -0.3018  1.1274 -1.1274 -0.5936  0.5936 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.35116    0.60703  -0.578    0.594
-a2           0.14326    0.85847   0.167    0.876
-b2           0.05227    0.85847   0.061    0.954
-a2:b2        0.16001    1.21407   0.132    0.902
+(Intercept)   0.2105     0.7458   0.282    0.792
+a2            0.1442     1.0547   0.137    0.898
+b2           -0.5802     1.0547  -0.550    0.612
+a2:b2         0.9295     1.4916   0.623    0.567
 
-Residual standard error: 0.8585 on 4 degrees of freedom
-Multiple R-squared:  0.04765,   Adjusted R-squared:  -0.6666 
-F-statistic: 0.06671 on 3 and 4 DF,  p-value: 0.9747</code></pre>
+Residual standard error: 1.055 on 4 degrees of freedom
+Multiple R-squared:  0.2124,    Adjusted R-squared:  -0.3783 
+F-statistic: 0.3596 on 3 and 4 DF,  p-value: 0.7864</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># z ~ a:b  # Model with only interaction term (a:b)</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -549,19 +545,19 @@ lm(formula = z ~ a:b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.2766  0.2766 -0.3711  0.3711 -0.6979  0.6979 -0.8791  0.8791 
+-0.7144  0.7144  0.3018 -0.3018  1.1274 -1.1274 -0.5936  0.5936 
 
 Coefficients: (1 not defined because of singularities)
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.004386   0.607033   0.007    0.995
-a1:b1       -0.355542   0.858475  -0.414    0.700
-a2:b1       -0.212279   0.858475  -0.247    0.817
-a1:b2       -0.303276   0.858475  -0.353    0.742
-a2:b2              NA         NA      NA       NA
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   0.7039     0.7458   0.944    0.399
+a1:b1        -0.4934     1.0547  -0.468    0.664
+a2:b1        -0.3493     1.0547  -0.331    0.757
+a1:b2        -1.0736     1.0547  -1.018    0.366
+a2:b2             NA         NA      NA       NA
 
-Residual standard error: 0.8585 on 4 degrees of freedom
-Multiple R-squared:  0.04765,   Adjusted R-squared:  -0.6666 
-F-statistic: 0.06671 on 3 and 4 DF,  p-value: 0.9747</code></pre>
+Residual standard error: 1.055 on 4 degrees of freedom
+Multiple R-squared:  0.2124,    Adjusted R-squared:  -0.3783 
+F-statistic: 0.3596 on 3 and 4 DF,  p-value: 0.7864</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># B2. Please also discuss the implications of using these two models;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># please be reminded about the model fits and notice</span></span>
@@ -624,18 +620,18 @@ lm(formula = z ~ a * b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.2766  0.2766 -0.3711  0.3711 -0.6979  0.6979 -0.8791  0.8791 
+-0.7144  0.7144  0.3018 -0.3018  1.1274 -1.1274 -0.5936  0.5936 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept) -0.35116    0.60703  -0.578    0.594
-a2           0.14326    0.85847   0.167    0.876
-b2           0.05227    0.85847   0.061    0.954
-a2:b2        0.16001    1.21407   0.132    0.902
+(Intercept)   0.2105     0.7458   0.282    0.792
+a2            0.1442     1.0547   0.137    0.898
+b2           -0.5802     1.0547  -0.550    0.612
+a2:b2         0.9295     1.4916   0.623    0.567
 
-Residual standard error: 0.8585 on 4 degrees of freedom
-Multiple R-squared:  0.04765,   Adjusted R-squared:  -0.6666 
-F-statistic: 0.06671 on 3 and 4 DF,  p-value: 0.9747</code></pre>
+Residual standard error: 1.055 on 4 degrees of freedom
+Multiple R-squared:  0.2124,    Adjusted R-squared:  -0.3783 
+F-statistic: 0.3596 on 3 and 4 DF,  p-value: 0.7864</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effects of a, b,</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and their interaction on the response variable z</span></span>
@@ -649,19 +645,19 @@ lm(formula = z ~ a:b)
 
 Residuals:
       1       2       3       4       5       6       7       8 
--0.2766  0.2766 -0.3711  0.3711 -0.6979  0.6979 -0.8791  0.8791 
+-0.7144  0.7144  0.3018 -0.3018  1.1274 -1.1274 -0.5936  0.5936 
 
 Coefficients: (1 not defined because of singularities)
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  0.004386   0.607033   0.007    0.995
-a1:b1       -0.355542   0.858475  -0.414    0.700
-a2:b1       -0.212279   0.858475  -0.247    0.817
-a1:b2       -0.303276   0.858475  -0.353    0.742
-a2:b2              NA         NA      NA       NA
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   0.7039     0.7458   0.944    0.399
+a1:b1        -0.4934     1.0547  -0.468    0.664
+a2:b1        -0.3493     1.0547  -0.331    0.757
+a1:b2        -1.0736     1.0547  -1.018    0.366
+a2:b2             NA         NA      NA       NA
 
-Residual standard error: 0.8585 on 4 degrees of freedom
-Multiple R-squared:  0.04765,   Adjusted R-squared:  -0.6666 
-F-statistic: 0.06671 on 3 and 4 DF,  p-value: 0.9747</code></pre>
+Residual standard error: 1.055 on 4 degrees of freedom
+Multiple R-squared:  0.2124,    Adjusted R-squared:  -0.3783 
+F-statistic: 0.3596 on 3 and 4 DF,  p-value: 0.7864</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This model will estimate the effect of the interaction term a:b on z,</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># assuming no separate effects for a or b.</span></span>
@@ -772,7 +768,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/rwalshusf\.quarto\.pub\/advancedstatsblog");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

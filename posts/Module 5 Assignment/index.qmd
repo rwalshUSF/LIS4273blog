@@ -8,10 +8,6 @@ date: "2025-02-11"
 An exercise in Hypothesis Testing & Correlation!
 
 ```{r}
-# LIS4273 - Module 5. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # The director of manufacturing at a cookies company needs to determine

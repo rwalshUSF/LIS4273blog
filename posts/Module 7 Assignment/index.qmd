@@ -8,10 +8,6 @@ date: "2025-02-25"
 An Exercise in Simple and Multiple Regression!
 
 ```{r}
-# LIS4273 - Module 7. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # In this assignment's segment, we will use the following regression

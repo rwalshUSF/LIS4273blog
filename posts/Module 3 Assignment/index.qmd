@@ -10,10 +10,6 @@ An exercise in descriptive statistics!
 This was a lot of fun!
 
 ```{r}
-# LIS4273 - Module 3. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-#
 library(DescTools)
 # Import the two data sets from .csv file
 dataSets<-read.csv("C:/LIS4273blog/Mod3DataSets.csv",header = TRUE,sep = ",")

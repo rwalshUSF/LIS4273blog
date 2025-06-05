@@ -8,10 +8,6 @@ date: "2025-02-17"
 Random Variables & Probability Distributions!
 
 ```{r}
-# LIS4273 - Module 6. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Question A.
 
 # Consider a population consisting of the following values,

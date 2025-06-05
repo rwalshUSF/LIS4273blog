@@ -10,10 +10,6 @@ This Function Calculates The Mean!
 Here is how it works!
 
 ```{r}
-# LIS4273 - Module 2. Assignment
-# Robert Walsh
-# Professor Lingyao Li
-
 # Create a vector using the c() function
 # and store the results in the 'assignment2' variable/object
 

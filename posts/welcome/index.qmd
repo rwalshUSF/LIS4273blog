@@ -4,6 +4,6 @@ author: "Robert Walsh"
 date: "2025-01-21"
 ---
 
-This is the first post in my LIS4273 blog. Welcome!
+This is the first post in my blog. Welcome!
 
 ![](thumbnail.jpg)
