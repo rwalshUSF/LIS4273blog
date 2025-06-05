@@ -5,6 +5,7 @@ h1.title {
   font-family: "Gothic A1";
   font-size: 50px;
   color: white;
+  text-align: center;
 }
 body {
   background-color: beige;
