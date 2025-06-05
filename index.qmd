@@ -1,5 +1,5 @@
 ---
-title: "![](USF50.jpg) USF - LIS4273 Advanced Stats - Blog ![](USF50.jpg)"
+title: "![](favicon.PNG) Advanced Stats - Blog ![](favicon.PNG)"
 listing:
   contents: posts
   sort: "date desc"

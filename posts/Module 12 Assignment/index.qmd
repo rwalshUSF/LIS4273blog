@@ -16,7 +16,9 @@ Exercise in Time Series Regression!
 
 # The table below represents charges for a student credit card. 
 ```
-<img src="charges.png" alt="Girl in a jacket" width="500" height="600">
+
+<img src="charges.png" alt="Girl in a jacket" width="500" height="600"/>
+
 ```{r warning=FALSE,message=FALSE}
 # A1. Construct a time series plot using R.
 
@@ -83,4 +85,3 @@ plot(chargeFutureForecast)
 # This plot displays the prediction for 2014.
 
 ```
-
