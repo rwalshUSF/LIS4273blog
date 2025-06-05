@@ -1,5 +1,5 @@
 ---
-title: "![](favicon.PNG) Advanced Stats - Blog ![](favicon.PNG)"
+title: "![](favicon.PNG) Advanced Stats ![](favicon.PNG)"
 listing:
   contents: posts
   sort: "date desc"
