@@ -1,10 +1,10 @@
 ---
-title: "Robert Walsh"
-image: USF500.jpg
+title: "About Me"
+image: profile.jpg
 about:
   template: jolla
 ---
 
-UNIVERSITY OF SOUTH FLORIDA - SCHOOL OF INFORMATION - LIS4273
+UNIVERSITY OF SOUTH FLORIDA - SCHOOL OF INFORMATION STUDENT
 
 A blog for sharing my class assignments.
